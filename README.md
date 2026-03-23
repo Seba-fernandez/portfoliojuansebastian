@@ -1,32 +1,43 @@
-# Portfolio — Juan Sebastián Fernandez
+# Juan Sebastián Fernandez — Portfolio
+
+Portfolio personal como Frontend Developer. Sitio estático de una sola página construido con HTML5 semántico, CSS3 moderno y JavaScript vanilla — sin frameworks ni dependencias externas.
+
+## 🔗 [juansebastian.vercel.app](https://juansebastian.vercel.app)
+
+---
+
+## Stack
+
+- **HTML5** — estructura semántica, accesibilidad WCAG 2.2 AA
+- **CSS3** — custom properties, Grid, Flexbox, animaciones, responsive mobile-first
+- **JavaScript ES6+** — IntersectionObserver para animaciones de entrada, menú hamburger
 
 ## Estructura
 
 ```
 portfolio/
 ├── index.html   ← Contenido y estructura
-├── style.css    ← Todo el CSS (variables, base, secciones, media queries)
-├── main.js      ← Solo IntersectionObserver (~20 líneas)
+├── style.css    ← Variables, base, componentes, secciones y media queries
+├── main.js      ← Animaciones de entrada + menú mobile
 └── README.md
 ```
 
-## Reemplazos antes de publicar
+## Características
 
-Buscá `TU-USUARIO` y `TU-PERFIL` en `index.html`:
+- Diseño responsive con menú hamburger en mobile
+- Animaciones de entrada con IntersectionObserver (respeta `prefers-reduced-motion`)
+- Navegación accesible por teclado con skip-link y focus visible
+- Sin librerías externas
+- Optimizado para Lighthouse 90+ en performance, accesibilidad y SEO
 
-| Placeholder                                    | Reemplazar por              |
-|------------------------------------------------|-----------------------------|
-| `https://github.com/TU-USUARIO`                | Tu URL de GitHub            |
-| `https://linkedin.com/in/TU-PERFIL`            | Tu URL de LinkedIn          |
-| `https://github.com/TU-USUARIO/greenset-landing` | Repo Greenset             |
-| `https://github.com/TU-USUARIO/blog-cafe`      | Repo Blog Café              |
-| `https://github.com/TU-USUARIO/festival-musica`| Repo Festival               |
+## Proyectos destacados
 
-Links live ya verificados y correctos:
-- https://greenset-landing.vercel.app
-- https://blog-cafe-sebas.netlify.app
-- https://festival-musica-sebas.netlify.app
+| Proyecto | Demo | Repo |
+|---|---|---|
+| Greenset Court | [greenset-landing.vercel.app](https://greenset-landing.vercel.app) | [GitHub](https://github.com/Seba-fernandez/Greenset-Landing) |
+| Blog de Café | [blog-cafe-beige.vercel.app](https://blog-cafe-beige.vercel.app) | [GitHub](https://github.com/Seba-fernandez/BlogCafe) |
+| Festival de Música | [festivalde-musica.vercel.app](https://festivalde-musica.vercel.app) | [GitHub](https://github.com/Seba-fernandez/FestivaldeMusica) |
 
-## Deploy
+---
 
-Arrastrá la carpeta a https://vercel.com/new o corré `vercel` desde la terminal.
+**Juan Sebastián Fernandez** · [LinkedIn](https://www.linkedin.com/in/juansebastian-fernandez/) · [GitHub](https://github.com/Seba-fernandez)
