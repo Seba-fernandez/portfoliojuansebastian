@@ -1,10 +1,9 @@
 /* ============================================================
    VARIABLES
-   Cambiá estos valores para re-themar todo el sitio.
    ============================================================ */
 :root {
   --color-bg:           #0e0e0c;
-  --color-surface:      #161614;
+  --color-surface:      #181816;
   --color-border:       rgba(255, 255, 255, 0.07);
   --color-text:         #e8e4dc;
   --color-muted:        #7a7670;
@@ -24,7 +23,7 @@
 
   --max-width:  1100px;
   --nav-height: 56px;
-  --gap:        1.5px;
+  --gap:        10px;
   --radius:     6px;
 }
 
@@ -43,10 +42,6 @@ a     { color: inherit; text-decoration: none; }
    ============================================================ */
 body {
   background-color: var(--color-bg);
-  /*
-    Textura de grano via SVG inline: cero requests HTTP extra,
-    Lighthouse no la penaliza.
-  */
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
   color: var(--color-text);
   font-family: var(--font-ui);
@@ -69,7 +64,7 @@ h1, h2, h3 {
 
 
 /* ============================================================
-   LAYOUT — Contenedor y sección
+   LAYOUT
    ============================================================ */
 .container {
   max-width: var(--max-width);
@@ -81,11 +76,10 @@ h1, h2, h3 {
   padding-block: var(--space-5);
 }
 
-/* Encabezado de sección: número decorativo + título */
 .section-head {
   display: flex;
   align-items: baseline;
-  gap: var(--space-3);
+  gap: var(--space-2);
   margin-bottom: var(--space-4);
   padding-bottom: var(--space-2);
   border-bottom: 1px solid var(--color-border);
@@ -107,7 +101,6 @@ h1, h2, h3 {
    COMPONENTES REUTILIZABLES
    ============================================================ */
 
-/* Label — texto en mayúsculas con acento */
 .label {
   font-size: 0.68rem;
   font-weight: 700;
@@ -116,10 +109,6 @@ h1, h2, h3 {
   color: var(--color-accent);
 }
 
-/*
-  Botón — dos variantes: primary y ghost.
-  min-height 44px: área táctil mínima WCAG 2.2 §2.5.8.
-*/
 .btn {
   display: inline-flex;
   align-items: center;
@@ -158,7 +147,6 @@ h1, h2, h3 {
   border-color: var(--color-accent);
 }
 
-/* Badge de estado en cards */
 .badge {
   font-size: 0.65rem;
   font-weight: 700;
@@ -171,7 +159,6 @@ h1, h2, h3 {
 .badge--live { border-color: rgba(76, 175, 130, 0.4); color: var(--color-green); }
 .badge--wip  { border-color: rgba(212, 160, 74, 0.3); color: var(--color-accent); }
 
-/* Chip de tecnología */
 .chip {
   font-size: 0.68rem;
   padding: 2px 8px;
@@ -180,12 +167,6 @@ h1, h2, h3 {
   color: var(--color-muted);
 }
 
-/*
-  Animaciones de entrada.
-  CSS declara la transición; JS añade .visible al entrar al viewport.
-  Sin JS el contenido sigue visible (opacity no se toca por defecto).
-  prefers-reduced-motion: no se aplica nada si el usuario lo prefiere.
-*/
 @media (prefers-reduced-motion: no-preference) {
   .reveal {
     opacity: 0;
@@ -212,7 +193,6 @@ h1, h2, h3 {
   justify-content: space-between;
   padding-inline: var(--space-3);
   background-color: rgba(14, 14, 12, 0.85);
-  /* backdrop-filter: el contenido pasa por debajo con legibilidad */
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--color-border);
@@ -239,7 +219,7 @@ h1, h2, h3 {
 .nav__links a:hover,
 .nav__links a:focus-visible { color: var(--color-text); }
 
-/* Skip-link: invisible hasta recibir foco — WCAG 2.2 §2.4.1 */
+/* Skip-link */
 .skip-link {
   position: absolute;
   top: -100px;
@@ -248,6 +228,80 @@ h1, h2, h3 {
   transition: top 0.2s;
 }
 .skip-link:focus { top: var(--space-2); }
+
+/*
+  Hamburger: oculto por defecto en desktop.
+  3 líneas dibujadas con box-shadow — sin SVG, sin imágenes.
+  Las líneas se transforman en X cuando el menú está abierto.
+*/
+.nav__hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: var(--radius);
+  transition: background-color 0.2s;
+}
+.nav__hamburger:hover { background-color: var(--color-accent-bg); }
+
+/* Las 3 líneas del ícono */
+.nav__hamburger span {
+  display: block;
+  width: 100%;
+  height: 1.5px;
+  background-color: var(--color-text);
+  border-radius: 2px;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  transform-origin: center;
+}
+
+/* Estado abierto: línea del medio desaparece, arriba y abajo forman X */
+.nav__hamburger.is-open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav__hamburger.is-open span:nth-child(2) { opacity: 0; }
+.nav__hamburger.is-open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/*
+  Menú mobile: panel que cae desde la nav.
+  Oculto por defecto, se muestra cuando nav tiene clase .menu-open.
+*/
+.nav__mobile {
+  display: none;
+  position: absolute;
+  top: var(--nav-height);
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.97);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--space-2) var(--space-3);
+  list-style: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+   z-index: 99;
+}
+
+.nav__mobile.is-open { display: flex; }
+
+.nav__mobile a {
+  display: block;
+  padding: 0.75rem 0;
+  font-size: 1rem;
+  letter-spacing: 0.06em;
+  color: var(--color-muted);
+  border-bottom: 1px solid var(--color-border);
+  transition: color 0.2s;
+}
+.nav__mobile a:last-child { border-bottom: none; }
+.nav__mobile a:hover,
+.nav__mobile a:focus-visible { color: var(--color-text); }
 
 
 /* ============================================================
@@ -261,7 +315,6 @@ h1, h2, h3 {
   position: relative;
 }
 
-/* Detalle decorativo: esquina superior derecha */
 .hero::before {
   content: '';
   position: absolute;
@@ -301,7 +354,6 @@ h1, h2, h3 {
   margin-bottom: var(--space-3);
 }
 
-/* em en Fraunces activa el eje óptico "wobbly": cursiva editorial */
 .hero__title em {
   font-style: italic;
   color: var(--color-accent);
@@ -330,7 +382,6 @@ h1, h2, h3 {
   gap: var(--gap);
 }
 
-/* Card base */
 .card {
   background-color: var(--color-surface);
   padding: var(--space-3);
@@ -341,7 +392,6 @@ h1, h2, h3 {
   overflow: hidden;
 }
 
-/* Glow sutil al hacer hover */
 .card::after {
   content: '';
   position: absolute;
@@ -366,16 +416,18 @@ h1, h2, h3 {
   line-height: 1.15;
 }
 
-/* El proyecto featured (cliente real) ocupa 2 columnas */
 .card--featured .card__title {
   font-size: clamp(1.7rem, 3.5vw, 2.4rem);
 }
 
-/*
-  PSI: Problema → Solución → Resultado.
-  dl/dt/dd: semánticamente correcto para listas término-descripción.
-  Más significativo que divs para lectores de pantalla y SEO.
-*/
+.card__context {
+  font-size: 0.8rem;
+  color: var(--color-muted);
+  font-style: italic;
+  margin-top: -0.5rem;
+  opacity: 0.75;
+}
+
 .psi {
   font-size: 0.87rem;
   color: var(--color-muted);
@@ -408,7 +460,6 @@ h1, h2, h3 {
   gap: var(--space-1);
 }
 
-/* Links de card: misma base visual que .btn pero más compactos */
 .card__link {
   display: inline-flex;
   align-items: center;
@@ -589,45 +640,46 @@ footer {
 
 
 /* ============================================================
-   MEDIA QUERIES — mobile → tablet → desktop → wide
+   MEDIA QUERIES — mobile - tablet - desktop - wide
    ============================================================ */
 
 /* Mobile (< 640px) */
 @media (max-width: 639px) {
-  .container         { padding-inline: var(--space-2); }
-  .section           { padding-block: var(--space-4); }
-  .nav               { padding-inline: var(--space-2); }
-  .nav__links        { display: none; }
-  .skills-grid       { grid-template-columns: repeat(2, 1fr); }
-  .exp-item          { grid-template-columns: 1fr; }
-  .exp-item__period  { text-align: left; }
+  .container              { padding-inline: var(--space-2); }
+  .section                { padding-block: var(--space-4); }
+  .nav                    { padding-inline: var(--space-2); }
+  .nav__links             { display: none; }
+  .nav__hamburger         { display: flex; }
+  .skills-grid            { grid-template-columns: repeat(2, 1fr); }
+  .exp-item               { grid-template-columns: 1fr; }
+  .exp-item__period       { text-align: left; }
 }
 
 /* Tablet (≥ 640px) */
 @media (min-width: 640px) {
-  .projects-grid     { grid-template-columns: repeat(2, 1fr); }
-  .card--featured    { grid-column: span 2; }
-  .card--featured .psi { flex-direction: row; gap: var(--space-3); }
-  .skills-grid       { grid-template-columns: repeat(3, 1fr); }
+  .projects-grid          { grid-template-columns: repeat(2, 1fr); }
+  .card--featured         { grid-column: span 2; }
+  .card--featured .psi    { flex-direction: row; gap: var(--space-3); }
+  .skills-grid            { grid-template-columns: repeat(3, 1fr); }
 }
 
 /* Desktop (≥ 900px) */
 @media (min-width: 900px) {
-  .projects-grid     { grid-template-columns: repeat(3, 1fr); }
-  .card--featured    { grid-column: span 2; }
-  .skills-grid       { grid-template-columns: repeat(6, 1fr); }
-  .nav               { padding-inline: var(--space-4); }
+  .projects-grid          { grid-template-columns: repeat(3, 1fr); }
+  .card--featured         { grid-column: span 2; }
+  .skills-grid            { grid-template-columns: repeat(6, 1fr); }
+  .nav                    { padding-inline: var(--space-4); }
 }
 
 /* Wide (≥ 1280px) */
 @media (min-width: 1280px) {
-  .container         { padding-inline: var(--space-4); }
-  .hero__title       { letter-spacing: -0.04em; }
+  .container              { padding-inline: var(--space-4); }
+  .hero__title            { letter-spacing: -0.04em; }
 }
 
 
 /* ============================================================
-   PRINT — el reclutador puede imprimir o exportar a PDF
+   PRINT
    ============================================================ */
 @media print {
   header, .hero__ctas, .card__actions { display: none; }
