@@ -9,11 +9,6 @@
   <meta name="theme-color" content="#0e0e0c" />
   <title>Juan Sebastián Fernandez · Web Developer</title>
 
-  <!--
-    preconnect reduce la latencia de DNS antes de pedir la fuente.
-    display=swap: el texto es visible mientras carga (evita FOIT).
-    Solo se piden los pesos que se usan.
-  -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -24,7 +19,6 @@
 </head>
 
 <body>
-  <!-- Skip-link: primer elemento focusable — WCAG 2.2 §2.4.1 -->
   <a href="#main" class="btn btn--primary skip-link">Saltar al contenido</a>
 
   <!-- ======================================================
@@ -33,16 +27,45 @@
   <header>
     <nav class="nav" aria-label="Navegación principal">
       <span class="nav__logo" aria-hidden="true">JSF</span>
+
+      <!-- Links desktop — se ocultan en mobile -->
       <ul class="nav__links" role="list">
         <li><a href="#projects">Proyectos</a></li>
         <li><a href="#skills">Skills</a></li>
         <li><a href="#experience">Experiencia</a></li>
         <li><a href="#contact">Contacto</a></li>
       </ul>
+
+      <!--
+        Botón hamburger: visible solo en mobile (CSS lo muestra en < 640px).
+        aria-expanded comunica el estado al lector de pantalla.
+        aria-controls apunta al id del menú que controla.
+      -->
+      <button
+        class="nav__hamburger"
+        id="hamburger"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </nav>
+
+    <!-- Menú mobile — separado del nav para no afectar el layout sticky -->
+    <ul class="nav__mobile" id="mobile-menu" role="list">
+      <li><a href="#projects">Proyectos</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experiencia</a></li>
+      <li><a href="#contact">Contacto</a></li>
+    </ul>
   </header>
 
+
   <main id="main">
+
     <!-- ======================================================
          HERO
          ====================================================== -->
@@ -71,7 +94,7 @@
           <a href="https://mail.google.com/mail/?view=cm&to=jsebasferna@gmail.com&su=Hola%20Sebasti%C3%A1n%20%E2%80%94%20Vi%20tu%20portfolio"
             target="_blank" rel="noopener noreferrer" class="btn btn--ghost">
             Contactar ↗
-          <!-- ⚠ REEMPLAZAR con tu URL de GitHub -->
+          </a>
           <a href="https://github.com/Seba-fernandez" target="_blank" rel="noopener noreferrer" class="btn btn--ghost"
             aria-label="Perfil en GitHub (nueva pestaña)">GitHub ↗</a>
         </div>
@@ -80,10 +103,6 @@
 
     <!-- ======================================================
          PROJECTS
-         Orden por señal de producción:
-         1. Cliente real + live
-         2. Multi-página + JS DOM
-         3. Landing + performance + video
          ====================================================== -->
     <section id="projects" class="section" aria-labelledby="projects-title">
       <div class="container">
@@ -93,6 +112,7 @@
         </header>
 
         <div class="projects-grid">
+
           <!-- Greenset Court — cliente real, featured -->
           <article class="card card--featured reveal" aria-labelledby="proj-greenset">
             <div class="card__header">
@@ -100,34 +120,19 @@
               <span class="badge badge--live">↗ Live</span>
             </div>
             <h3 class="card__title" id="proj-greenset">Greenset Court</h3>
-            <!--
-              dl/dt/dd: lista de definición — semánticamente correcto
-              para una relación término/descripción como Problema→Solución.
-            -->
+            <p class="card__context">Landing page para empresa de césped sintético en Córdoba</p>
             <dl class="psi">
               <div class="psi__item">
                 <dt class="psi__label">Problema</dt>
-                <dd>
-                  Cliente del rubro deportivo sin presencia digital,
-                  necesitaba capturar leads calificados antes de su
-                  lanzamiento y mostrar autoridad de marca y profesionalismo.
-                </dd>
+                <dd>Cliente del rubro deportivo sin presencia digital, necesitaba capturar leads calificados antes de su lanzamiento y mostrar autoridad de marca y profesionalismo.</dd>
               </div>
               <div class="psi__item">
                 <dt class="psi__label">Solución</dt>
-                <dd>
-                  Landing de diseño modernizado y adaptado al mercado de
-                  deportes con formulario de calificación por tipo de proyecto
-                  y etapa, envío directo a WhatsApp sin backend. Contadores
-                  animados con Intersection Observer.
-                </dd>
+                <dd>Landing de diseño modernizado y adaptado al mercado de deportes con formulario de calificación por tipo de proyecto y etapa, envío directo a WhatsApp sin backend. Contadores animados con Intersection Observer.</dd>
               </div>
               <div class="psi__item">
                 <dt class="psi__label">Resultado</dt>
-                <dd>
-                  Sitio activo en producción. Assets en WebP, mobile-first,
-                  deploy continuo en Vercel y con mantenimiento.
-                </dd>
+                <dd>Sitio activo en producción. Assets en WebP, mobile-first, deploy continuo en Vercel y con mantenimiento.</dd>
               </div>
             </dl>
             <div class="card__stack">
@@ -141,7 +146,6 @@
             <div class="card__actions">
               <a href="https://greenset-landing.vercel.app" target="_blank" rel="noopener noreferrer"
                 class="card__link card__link--primary" aria-label="Demo vivo Greenset Court">Demo vivo ↗</a>
-              <!-- ⚠ REEMPLAZAR con tu repo de GitHub -->
               <a href="https://github.com/Seba-fernandez/Greenset-Landing" target="_blank" rel="noopener noreferrer"
                 class="card__link card__link--ghost" aria-label="Código fuente Greenset Court">Ver código</a>
             </div>
@@ -154,20 +158,15 @@
               <span class="badge badge--live">↗ Live</span>
             </div>
             <h3 class="card__title" id="proj-blog">Blog de Café</h3>
+            <p class="card__context">Blog educativo con cursos y recetas de café</p>
             <dl class="psi">
               <div class="psi__item">
                 <dt class="psi__label">Problema</dt>
-                <dd>
-                  Demostrar arquitectura multi-página y manipulación del DOM
-                  sin frameworks ni librerías externas.
-                </dd>
+                <dd>Demostrar arquitectura multi-página y manipulación del DOM sin frameworks ni librerías externas.</dd>
               </div>
               <div class="psi__item">
                 <dt class="psi__label">Solución</dt>
-                <dd>
-                  Blog de 5 páginas con listado de cursos, entradas y
-                  validación de formulario de contacto en JS ES6+ puro.
-                </dd>
+                <dd>Blog de 5 páginas con listado de cursos, entradas y validación de formulario de contacto en JS ES6+ puro.</dd>
               </div>
             </dl>
             <div class="card__stack">
@@ -175,12 +174,12 @@
               <span class="chip">CSS3</span>
               <span class="chip">JS ES6+</span>
               <span class="chip">DOM API</span>
-              <span class="chip">Netlify</span>
+              <span class="chip">Vercel</span>
             </div>
             <div class="card__actions">
-              <a href="https://blog-cafe-sebas.netlify.app" target="_blank" rel="noopener noreferrer"
+              <a href="https://blog-cafe-beige.vercel.app" target="_blank" rel="noopener noreferrer"
                 class="card__link card__link--primary" aria-label="Demo vivo Blog Café">Demo vivo ↗</a>
-              <a href="https://github.com/TU-USUARIO/blog-cafe" target="_blank" rel="noopener noreferrer"
+              <a href="https://github.com/Seba-fernandez/BlogCafe" target="_blank" rel="noopener noreferrer"
                 class="card__link card__link--ghost" aria-label="Código fuente Blog Café">Ver código</a>
             </div>
           </article>
@@ -192,22 +191,15 @@
               <span class="badge badge--live">↗ Live</span>
             </div>
             <h3 class="card__title" id="proj-festival">Festival de Música</h3>
+            <p class="card__context">Landing para festival de música electrónica en Argentina</p>
             <dl class="psi">
               <div class="psi__item">
                 <dt class="psi__label">Problema</dt>
-                <dd>
-                  Evento musical que necesita landing de alto impacto con
-                  imagenes ligeras, lineup de 2 días y display en forma de
-                  sistema de tickets.
-                </dd>
+                <dd>Evento musical que necesita landing de alto impacto con imagenes ligeras, lineup de 2 días y display en forma de sistema de tickets.</dd>
               </div>
               <div class="psi__item">
                 <dt class="psi__label">Solución</dt>
-                <dd>
-                  Landing page con video background, grilla de lineup para 2
-                  escenarios, galería y cards de tickets. SASS en partials,
-                  WebP, lazy loading.
-                </dd>
+                <dd>Landing page con video background, grilla de lineup para 2 escenarios, galería y cards de tickets. SASS en partials, WebP, lazy loading.</dd>
               </div>
             </dl>
             <div class="card__stack">
@@ -215,16 +207,16 @@
               <span class="chip">SASS/SCSS</span>
               <span class="chip">WebP</span>
               <span class="chip">Lazy loading</span>
-              <span class="chip">Netlify</span>
+              <span class="chip">Vercel</span>
             </div>
             <div class="card__actions">
-              <a href="https://festival-musica-sebas.netlify.app" target="_blank" rel="noopener noreferrer"
+              <a href="https://festivalde-musica.vercel.app/" target="_blank" rel="noopener noreferrer"
                 class="card__link card__link--primary" aria-label="Demo vivo Festival de Música">Demo vivo ↗</a>
-              <!-- ⚠ REEMPLAZAR con tu repo de GitHub -->
-              <a href="https://github.com/TU-USUARIO/festival-musica" target="_blank" rel="noopener noreferrer"
+              <a href="https://github.com/Seba-fernandez/FestivaldeMusica" target="_blank" rel="noopener noreferrer"
                 class="card__link card__link--ghost" aria-label="Código fuente Festival de Música">Ver código</a>
             </div>
           </article>
+
         </div>
       </div>
     </section>
@@ -250,7 +242,6 @@
               <li>SQL</li>
             </ul>
           </div>
-
           <div class="skill-group reveal delay-1">
             <p class="skill-group__name">Frontend</p>
             <ul class="skill-group__list" role="list">
@@ -261,7 +252,6 @@
               <li>CSS Animations</li>
             </ul>
           </div>
-
           <div class="skill-group reveal delay-2">
             <p class="skill-group__name">Performance</p>
             <ul class="skill-group__list" role="list">
@@ -272,7 +262,6 @@
               <li>Mobile-first delivery</li>
             </ul>
           </div>
-
           <div class="skill-group reveal delay-3">
             <p class="skill-group__name">Accesibilidad</p>
             <ul class="skill-group__list" role="list">
@@ -283,7 +272,6 @@
               <li>Meta tags</li>
             </ul>
           </div>
-
           <div class="skill-group reveal delay-1">
             <p class="skill-group__name">Herramientas</p>
             <ul class="skill-group__list" role="list">
@@ -294,7 +282,6 @@
               <li>Responsively</li>
             </ul>
           </div>
-
           <div class="skill-group reveal delay-2">
             <p class="skill-group__name">En formación</p>
             <ul class="skill-group__list" role="list">
@@ -310,7 +297,7 @@
     </section>
 
     <!-- ======================================================
-         EXPERIENCE — cronológica inversa
+         EXPERIENCE
          ====================================================== -->
     <section id="experience" class="section" aria-labelledby="exp-title">
       <div class="container">
@@ -323,26 +310,12 @@
           <article class="exp-item reveal">
             <div>
               <h3 class="exp-item__role">Web Developer</h3>
-              <p class="exp-item__company">
-                Freelance — Desarrollo Independiente
-              </p>
+              <p class="exp-item__company">Freelance — Desarrollo Independiente</p>
               <ul class="exp-item__bullets" aria-label="Responsabilidades">
-                <li>
-                  Sitios responsivos, landings y e-commerce deployados en
-                  producción.
-                </li>
-                <li>
-                  Performance: WebP, lazy loading y auditorías Lighthouse en
-                  cada proyecto.
-                </li>
-                <li>
-                  WCAG 2.1, ARIA, semántica HTML5 y cross-browser como
-                  estándar.
-                </li>
-                <li>
-                  Workflow Git/GitHub con CI/CD en Vercel y Netlify; diseños
-                  desde Figma.
-                </li>
+                <li>Sitios responsivos, landings y e-commerce deployados en producción.</li>
+                <li>Performance: WebP, lazy loading y auditorías Lighthouse en cada proyecto.</li>
+                <li>WCAG 2.1, ARIA, semántica HTML5 y cross-browser como estándar.</li>
+                <li>Workflow Git/GitHub con CI/CD en Vercel y Netlify; diseños desde Figma.</li>
               </ul>
             </div>
             <time class="exp-item__period" datetime="2022-12">Dic. 2022 – Presente</time>
@@ -353,8 +326,6 @@
 
     <!-- ======================================================
          CONTACT
-         Sin formulario = sin backend = cero fricción.
-         mailto con subject preescrito facilita el primer mensaje.
          ====================================================== -->
     <section id="contact" class="section contact" aria-labelledby="contact-title">
       <div class="container">
@@ -365,8 +336,7 @@
         </h2>
 
         <p class="contact__sub reveal delay-2">
-          Disponible para proyectos freelance, trabajo remoto y posiciones en
-          equipos tech.
+          Disponible para proyectos freelance, trabajo remoto y posiciones en equipos tech.
         </p>
 
         <div class="contact__links reveal delay-3">
@@ -381,6 +351,7 @@
         </div>
       </div>
     </section>
+
   </main>
 
   <!-- ======================================================
@@ -390,7 +361,6 @@
     <p>Juan Sebastián Fernandez · Córdoba, Argentina · 2026</p>
   </footer>
 
-  <!-- JS al final del body: no bloquea el render -->
   <script src="main.js"></script>
 </body>
 
