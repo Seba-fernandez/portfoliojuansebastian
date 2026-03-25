@@ -77,6 +77,7 @@ h1, h2, h3 {
 }
 
 .section-head {
+  position: inherit;
   display: flex;
   align-items: baseline;
   gap: var(--space-2);
@@ -183,10 +184,23 @@ h1, h2, h3 {
 /* ============================================================
    NAV
    ============================================================ */
-.nav {
+
+/*
+  BUG FIX #2: el sticky se mueve al <header> en lugar de al <nav>.
+  Antes: .nav { position: sticky } y .nav__mobile era hermano del nav
+  dentro del header, con position: absolute. Como el nav era sticky pero
+  el header no, el menú mobile quedaba anclado al header (que sí scrolleaba).
+  Ahora: header es el elemento sticky. nav__mobile (position: absolute,
+  top: nav-height) queda posicionado relativo al header sticky → baja
+  exactamente debajo de la barra y se queda fijo al scrollear.
+*/
+header {
   position: sticky;
   top: 0;
   z-index: 100;
+}
+
+.nav {
   height: var(--nav-height);
   display: flex;
   align-items: center;
@@ -199,7 +213,7 @@ h1, h2, h3 {
 }
 
 .nav__logo {
-  font-family: var(--font-ui);
+  font-family: var(--font-display);
   font-weight: 700;
   font-size: 2rem;
 }
@@ -239,7 +253,7 @@ h1, h2, h3 {
   flex-direction: column;
   justify-content: center;
   gap: 5px;
-  width: 44px;
+  width: 50px;
   height: 44px;
   background: none;
   border: none;
@@ -268,7 +282,9 @@ h1, h2, h3 {
 
 /*
   Menú mobile: panel que cae desde la nav.
-  Oculto por defecto, se muestra cuando nav tiene clase .menu-open.
+  Oculto por defecto, se muestra con clase .is-open.
+  position: absolute relativo al <header> sticky (ver fix arriba).
+  left: auto; right: auto; + margin-inline para centrar y dejar espacio en mobile.
 */
 .nav__mobile {
   display: none;
@@ -278,14 +294,13 @@ h1, h2, h3 {
   right: 0;
   background-color: rgba(0, 0, 0, 0.97);
   backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--color-border);
-  padding: var(--space-2) var(--space-3);
+  padding: var(--space-1);
   list-style: none;
   flex-direction: column;
   align-items: center;
   gap: 2px;
-   z-index: 99;
+  z-index: 99;
 }
 
 .nav__mobile.is-open { display: flex; }
@@ -299,7 +314,15 @@ h1, h2, h3 {
   border-bottom: 1px solid var(--color-border);
   transition: color 0.2s;
 }
-.nav__mobile a:last-child { border-bottom: none; }
+
+/*
+  BUG FIX #4: antes era ".nav__mobile a:last-child".
+  Como cada <li> tiene un solo <a>, ese <a> ES el último hijo de su <li>,
+  así que el selector matcheaba TODOS los links → ninguno tenía borde.
+  El fix correcto es apuntar al último <li> y de ahí al <a>.
+*/
+.nav__mobile li:last-child a { border-bottom: none; }
+
 .nav__mobile a:hover,
 .nav__mobile a:focus-visible { color: var(--color-text); }
 
@@ -631,11 +654,17 @@ h1, h2, h3 {
    FOOTER
    ============================================================ */
 footer {
+  display: flex;
+  flex-direction: column;
   padding: var(--space-3);
   text-align: center;
   font-size: 0.72rem;
   color: var(--color-muted);
   border-top: 1px solid var(--color-border);
+
+  .nav__logo {
+    color: var(--color-text);
+  }
 }
 
 
@@ -661,6 +690,7 @@ footer {
   .card--featured         { grid-column: span 2; }
   .card--featured .psi    { flex-direction: row; gap: var(--space-3); }
   .skills-grid            { grid-template-columns: repeat(3, 1fr); }
+  .footer                 {display: flex; flex-direction: row; justify-content: space-between;}
 }
 
 /* Desktop (≥ 900px) */
