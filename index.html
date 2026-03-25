@@ -16,6 +16,7 @@
     rel="stylesheet" />
 
   <link rel="stylesheet" href="style.css" />
+  <script defer src="/_vercel/insights/script.js"></script>
 </head>
 
 <body>
@@ -26,9 +27,9 @@
        ====================================================== -->
   <header>
     <nav class="nav" aria-label="Navegación principal">
-      <span class="nav__logo" aria-hidden="true">JSF</span>
+      <a href="#main" class="nav__logo" aria-hidden="true">JSF</a>
 
-      <!-- Links desktop — se ocultan en mobile -->
+      <!-- Links desktop -->
       <ul class="nav__links" role="list">
         <li><a href="#projects">Proyectos</a></li>
         <li><a href="#skills">Skills</a></li>
@@ -37,9 +38,7 @@
       </ul>
 
       <!--
-        Botón hamburger: visible solo en mobile (CSS lo muestra en < 640px).
-        aria-expanded comunica el estado al lector de pantalla.
-        aria-controls apunta al id del menú que controla.
+        Botón hamburger: visible solo en mobile (activo en < 640px).
       -->
       <button
         class="nav__hamburger"
@@ -54,7 +53,7 @@
       </button>
     </nav>
 
-    <!-- Menú mobile — separado del nav para no afectar el layout sticky -->
+    <!-- Menú mobile  -->
     <ul class="nav__mobile" id="mobile-menu" role="list">
       <li><a href="#projects">Proyectos</a></li>
       <li><a href="#skills">Skills</a></li>
@@ -91,8 +90,13 @@
 
         <div class="hero__ctas reveal delay-3">
           <a href="#projects" class="btn btn--primary">Ver proyectos ↓</a>
-          <a href="https://mail.google.com/mail/?view=cm&to=jsebasferna@gmail.com&su=Hola%20Sebasti%C3%A1n%20%E2%80%94%20Vi%20tu%20portfolio"
-            target="_blank" rel="noopener noreferrer" class="btn btn--ghost">
+          <!--
+            BUG FIX #1: mailto: funciona universalmente en iOS, Android y desktop.
+            mail.google.com solo funciona con sesión de Gmail en navegador — roto en mobile.
+            Se removió target="_blank" y rel="noopener" porque no aplican a mailto:.
+          -->
+          <a href="mailto:jsebasferna@gmail.com?subject=Hola%20Sebasti%C3%A1n%20%E2%80%94%20Vi%20tu%20portfolio&body=Hola%20Sebasti%C3%A1n%2C%20vi%20tu%20portfolio%20y%20me%20gustar%C3%ADa%20contactarte."
+            class="btn btn--ghost">
             Contactar ↗
           </a>
           <a href="https://github.com/Seba-fernandez" target="_blank" rel="noopener noreferrer" class="btn btn--ghost"
@@ -340,8 +344,12 @@
         </p>
 
         <div class="contact__links reveal delay-3">
-          <a href="https://mail.google.com/mail/?view=cm&to=jsebasferna@gmail.com&su=Hola%20Sebasti%C3%A1n%20%E2%80%94%20Vi%20tu%20portfolio"
-            target="_blank" rel="noopener noreferrer" class="btn btn--primary">
+          <!--
+            BUG FIX #1 (segunda instancia): mismo fix que en hero.
+            mailto: es el protocolo universal para email en cualquier dispositivo.
+          -->
+          <a href="mailto:jsebasferna@gmail.com?subject=Hola%20Sebasti%C3%A1n%20%E2%80%94%20Vi%20tu%20portfolio&body=Hola%20Sebasti%C3%A1n%2C%20vi%20tu%20portfolio%20y%20me%20gustar%C3%ADa%20contactarte."
+            class="btn btn--primary">
             Escribir un mail ↗
           </a>
           <a href="https://www.linkedin.com/in/juansebastian-fernandez/" target="_blank" rel="noopener noreferrer"
@@ -358,6 +366,8 @@
        FOOTER
        ====================================================== -->
   <footer>
+    
+      <a href="#main" class="nav__logo" aria-hidden="true">JSF</a>
     <p>Juan Sebastián Fernandez · Córdoba, Argentina · 2026</p>
   </footer>
 
