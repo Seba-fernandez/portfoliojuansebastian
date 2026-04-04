@@ -2,7 +2,7 @@
 
 Portfolio personal como Frontend Developer. Sitio estático de una sola página construido con HTML5 semántico, CSS3 moderno y JavaScript vanilla — sin frameworks ni dependencias externas.
 
-## 🔗 [juansebastian.vercel.app](https://juansebastian.vercel.app)
+## 🔗 [[juansebastian.vercel.app](https://juansebastian.vercel.app)](https://juansebastian-dev.vercel.app/)
 <img width="614" height="1030" alt="image" src="https://github.com/user-attachments/assets/41648393-fc33-44d6-ad9e-a21ee3e61d19" />
 <img width="1898" height="1055" alt="image" src="https://github.com/user-attachments/assets/179a13c2-ca52-47c2-b3f8-fa152c837f46" />
 
