@@ -31,22 +31,16 @@
 
       <!-- Links desktop -->
       <ul class="nav__links" role="list">
+        
+        <li><a href="#experience">Experiencia</a></li>
         <li><a href="#projects">Proyectos</a></li>
         <li><a href="#skills">Skills</a></li>
-        <li><a href="#experience">Experiencia</a></li>
         <li><a href="#contact">Contacto</a></li>
       </ul>
 
-      <!--
-        Botón hamburger: visible solo en mobile (activo en < 640px).
-      -->
-      <button
-        class="nav__hamburger"
-        id="hamburger"
-        aria-label="Abrir menú"
-        aria-expanded="false"
-        aria-controls="mobile-menu"
-      >
+      <!-- Botón hamburger -->
+      <button class="nav__hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false"
+        aria-controls="mobile-menu">
         <span></span>
         <span></span>
         <span></span>
@@ -55,9 +49,10 @@
 
     <!-- Menú mobile  -->
     <ul class="nav__mobile" id="mobile-menu" role="list">
+      
+      <li><a href="#experience">Experiencia</a></li>
       <li><a href="#projects">Proyectos</a></li>
       <li><a href="#skills">Skills</a></li>
-      <li><a href="#experience">Experiencia</a></li>
       <li><a href="#contact">Contacto</a></li>
     </ul>
   </header>
@@ -90,11 +85,9 @@
 
         <div class="hero__ctas reveal delay-3">
           <a href="#projects" class="btn btn--primary">Ver proyectos ↓</a>
-          <!--
-            BUG FIX #1: mailto: funciona universalmente en iOS, Android y desktop.
-            mail.google.com solo funciona con sesión de Gmail en navegador — roto en mobile.
-            Se removió target="_blank" y rel="noopener" porque no aplican a mailto:.
-          -->
+
+          <!-- Mail -->
+
           <a href="mailto:jsebasferna@gmail.com?subject=Hola%20Sebasti%C3%A1n%20%E2%80%94%20Vi%20tu%20portfolio&body=Hola%20Sebasti%C3%A1n%2C%20vi%20tu%20portfolio%20y%20me%20gustar%C3%ADa%20contactarte."
             class="btn btn--ghost">
             Contactar ↗
@@ -104,6 +97,35 @@
         </div>
       </div>
     </section>
+    
+    <!-- ======================================================
+         Experiencia
+         ====================================================== -->
+    <section id="experience" class="section" aria-labelledby="exp-title">
+      <div class="container">
+        <header class="section-head">
+          <span class="section-head__num" aria-hidden="true">03</span>
+          <h2 class="section-head__title" id="exp-title">Experiencia</h2>
+        </header>
+
+        <div class="exp-list">
+          <article class="exp-item reveal">
+            <div>
+              <h3 class="exp-item__role">Web Developer</h3>
+              <p class="exp-item__company">Freelance — Desarrollo Independiente</p>
+              <ul class="exp-item__bullets" aria-label="Responsabilidades">
+                <li>Sitios responsivos, landings y e-commerce deployados en producción.</li>
+                <li>Performance: WebP, lazy loading y auditorías Lighthouse en cada proyecto.</li>
+                <li>WCAG 2.1, ARIA, semántica HTML5 y cross-browser como estándar.</li>
+                <li>Workflow Git/GitHub con CI/CD en Vercel y Netlify; diseños desde Figma.</li>
+              </ul>
+            </div>
+            <time class="exp-item__period" datetime="2022-12">Mar. 2024 – Presente</time>
+          </article>
+        </div>
+      </div>
+    </section>
+
 
     <!-- ======================================================
          PROJECTS
@@ -117,7 +139,7 @@
 
         <div class="projects-grid">
 
-          <!-- Greenset Court — cliente real, featured -->
+          <!-- Greenset Court — cliente -->
           <article class="card card--featured reveal" aria-labelledby="proj-greenset">
             <div class="card__header">
               <span class="label">Cliente real</span>
@@ -128,15 +150,19 @@
             <dl class="psi">
               <div class="psi__item">
                 <dt class="psi__label">Problema</dt>
-                <dd>Cliente del rubro deportivo sin presencia digital, necesitaba capturar leads calificados antes de su lanzamiento y mostrar autoridad de marca y profesionalismo.</dd>
+                <dd>Cliente del rubro deportivo sin presencia digital, necesitaba capturar leads calificados antes de su
+                  lanzamiento y mostrar autoridad de marca y profesionalismo.</dd>
               </div>
               <div class="psi__item">
                 <dt class="psi__label">Solución</dt>
-                <dd>Landing de diseño modernizado y adaptado al mercado de deportes con formulario de calificación por tipo de proyecto y etapa, envío directo a WhatsApp sin backend. Contadores animados con Intersection Observer.</dd>
+                <dd>Landing de diseño modernizado y adaptado al mercado de deportes con formulario de calificación por
+                  tipo de proyecto y etapa, envío directo a WhatsApp sin backend. Contadores animados con Intersection
+                  Observer.</dd>
               </div>
               <div class="psi__item">
                 <dt class="psi__label">Resultado</dt>
-                <dd>Sitio activo en producción. Assets en WebP, mobile-first, deploy continuo en Vercel y con mantenimiento.</dd>
+                <dd>Sitio activo en producción. Assets en WebP, mobile-first, deploy continuo en Vercel y con
+                  mantenimiento.</dd>
               </div>
             </dl>
             <div class="card__stack">
@@ -166,11 +192,13 @@
             <dl class="psi">
               <div class="psi__item">
                 <dt class="psi__label">Problema</dt>
-                <dd>Demostrar arquitectura multi-página y manipulación del DOM sin frameworks ni librerías externas.</dd>
+                <dd>Demostrar arquitectura multi-página y manipulación del DOM sin frameworks ni librerías externas.
+                </dd>
               </div>
               <div class="psi__item">
                 <dt class="psi__label">Solución</dt>
-                <dd>Blog de 5 páginas con listado de cursos, entradas y validación de formulario de contacto en JS ES6+ puro.</dd>
+                <dd>Blog de 5 páginas con listado de cursos, entradas y validación de formulario de contacto en JS ES6+
+                  puro.</dd>
               </div>
             </dl>
             <div class="card__stack">
@@ -199,11 +227,13 @@
             <dl class="psi">
               <div class="psi__item">
                 <dt class="psi__label">Problema</dt>
-                <dd>Evento musical que necesita landing de alto impacto con imagenes ligeras, lineup de 2 días y display en forma de sistema de tickets.</dd>
+                <dd>Evento musical que necesita landing de alto impacto con imagenes ligeras, lineup de 2 días y display
+                  en forma de sistema de tickets.</dd>
               </div>
               <div class="psi__item">
                 <dt class="psi__label">Solución</dt>
-                <dd>Landing page con video background, grilla de lineup para 2 escenarios, galería y cards de tickets. SASS en partials, WebP, lazy loading.</dd>
+                <dd>Landing page con video background, grilla de lineup para 2 escenarios, galería y cards de tickets.
+                  SASS en partials, WebP, lazy loading.</dd>
               </div>
             </dl>
             <div class="card__stack">
@@ -226,7 +256,7 @@
     </section>
 
     <!-- ======================================================
-         SKILLS
+         Habilidades
          ====================================================== -->
     <section id="skills" class="section" aria-labelledby="skills-title">
       <div class="container">
@@ -300,36 +330,9 @@
       </div>
     </section>
 
-    <!-- ======================================================
-         EXPERIENCE
-         ====================================================== -->
-    <section id="experience" class="section" aria-labelledby="exp-title">
-      <div class="container">
-        <header class="section-head">
-          <span class="section-head__num" aria-hidden="true">03</span>
-          <h2 class="section-head__title" id="exp-title">Experiencia</h2>
-        </header>
-
-        <div class="exp-list">
-          <article class="exp-item reveal">
-            <div>
-              <h3 class="exp-item__role">Web Developer</h3>
-              <p class="exp-item__company">Freelance — Desarrollo Independiente</p>
-              <ul class="exp-item__bullets" aria-label="Responsabilidades">
-                <li>Sitios responsivos, landings y e-commerce deployados en producción.</li>
-                <li>Performance: WebP, lazy loading y auditorías Lighthouse en cada proyecto.</li>
-                <li>WCAG 2.1, ARIA, semántica HTML5 y cross-browser como estándar.</li>
-                <li>Workflow Git/GitHub con CI/CD en Vercel y Netlify; diseños desde Figma.</li>
-              </ul>
-            </div>
-            <time class="exp-item__period" datetime="2022-12">Dic. 2022 – Presente</time>
-          </article>
-        </div>
-      </div>
-    </section>
 
     <!-- ======================================================
-         CONTACT
+         Contacto
          ====================================================== -->
     <section id="contact" class="section contact" aria-labelledby="contact-title">
       <div class="container">
@@ -344,10 +347,7 @@
         </p>
 
         <div class="contact__links reveal delay-3">
-          <!--
-            BUG FIX #1 (segunda instancia): mismo fix que en hero.
-            mailto: es el protocolo universal para email en cualquier dispositivo.
-          -->
+          <!-- Mail (tengo que corregir el envio desde mobile)-->
           <a href="mailto:jsebasferna@gmail.com?subject=Hola%20Sebasti%C3%A1n%20%E2%80%94%20Vi%20tu%20portfolio&body=Hola%20Sebasti%C3%A1n%2C%20vi%20tu%20portfolio%20y%20me%20gustar%C3%ADa%20contactarte."
             class="btn btn--primary">
             Escribir un mail ↗
@@ -366,8 +366,8 @@
        FOOTER
        ====================================================== -->
   <footer>
-    
-      <a href="#main" class="nav__logo" aria-hidden="true">JSF</a>
+
+    <a href="#main" class="nav__logo" aria-hidden="true">JSF</a>
     <p>Juan Sebastián Fernandez · Córdoba, Argentina · 2026</p>
   </footer>
 
