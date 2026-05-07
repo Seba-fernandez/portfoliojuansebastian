@@ -68,11 +68,72 @@
 
 
 /* ============================================================
-   MAIL — reemplaza mailto: (que Cloudflare restaura en runtime)
-   por URL directa de Gmail compose
+   SCROLL PROGRESS BAR
    ============================================================ */
 (function () {
   "use strict";
+  var root = document.documentElement;
+  window.addEventListener("scroll", function () {
+    var scrolled = window.scrollY;
+    var total    = root.scrollHeight - window.innerHeight;
+    var pct      = total > 0 ? (scrolled / total * 100).toFixed(1) : 0;
+    root.style.setProperty("--scroll-progress", pct + "%");
+  }, { passive: true });
+})();
+
+
+/* ============================================================
+   CONTADORES ANIMADOS
+   ============================================================ */
+(function () {
+  "use strict";
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    document.querySelectorAll(".stat__count").forEach(function (el) {
+      el.textContent = el.dataset.prefix + el.dataset.target + el.dataset.suffix;
+    });
+    return;
+  }
+
+  function animateCount(el) {
+    var target   = +el.dataset.target;
+    var prefix   = el.dataset.prefix || "";
+    var suffix   = el.dataset.suffix || "";
+    var duration = 1400;
+    var start    = null;
+
+    function step(ts) {
+      if (!start) start = ts;
+      var progress = Math.min((ts - start) / duration, 1);
+      var ease     = 1 - Math.pow(1 - progress, 3);
+      el.textContent = prefix + Math.floor(ease * target) + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      animateCount(entry.target);
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.6 });
+
+  document.querySelectorAll(".stat__count").forEach(function (el) {
+    observer.observe(el);
+  });
+})();
+
+
+/* ============================================================
+   MAIL — mobile: mailto: nativo / desktop: Gmail web compose
+   ============================================================ */
+(function () {
+  "use strict";
+
+  if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) return;
+
   var url = "https://mail.google.com/mail/?view=cm"
     + "&to=jsebasferna%40gmail.com"
     + "&su=Hola%20Sebasti%C3%A1n%20%E2%80%94%20Vi%20tu%20portfolio"
