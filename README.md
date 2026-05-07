@@ -3,8 +3,9 @@
 Portfolio personal como Frontend Developer. Sitio estático de una sola página construido con HTML5 semántico, CSS3 moderno y JavaScript vanilla — sin frameworks ni dependencias externas.
 
 ## 🔗 https://juansebastian-dev.vercel.app/
-<img width="614" height="1030" alt="image" src="https://github.com/user-attachments/assets/41648393-fc33-44d6-ad9e-a21ee3e61d19" />
-<img width="1898" height="1055" alt="image" src="https://github.com/user-attachments/assets/179a13c2-ca52-47c2-b3f8-fa152c837f46" />
+<img width="516" height="897" alt="image" src="https://github.com/user-attachments/assets/7e16af83-b766-4a70-9876-50a726ee586a" />
+<img width="1903" height="893" alt="image" src="https://github.com/user-attachments/assets/057d0cb3-dfb5-47f4-9e8d-45c10dcef399" />
+
 
 
 
@@ -42,6 +43,7 @@ portfolio/
 | Greenset Court | [greenset-landing.vercel.app](https://greenset-landing.vercel.app) | [GitHub](https://github.com/Seba-fernandez/Greenset-Landing) |
 | Blog de Café | [blog-cafe-beige.vercel.app](https://blog-cafe-beige.vercel.app) | [GitHub](https://github.com/Seba-fernandez/BlogCafe) |
 | Festival de Música | [festivalde-musica.vercel.app](https://festivalde-musica.vercel.app) | [GitHub](https://github.com/Seba-fernandez/FestivaldeMusica) |
+| Checklist De Oratoria | https://checklist-para-oratoria.vercel.app/ | https://github.com/Seba-fernandez/Checklist-para-Oratoria |
 
 ---
 
